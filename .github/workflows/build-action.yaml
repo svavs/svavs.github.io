@@ -1,6 +1,9 @@
 # build and deploy on push on every branch
 name: Zola Deploy to Pages
-on: push
+on: 
+  push:
+    branch:
+      develop
 
 jobs:
   build:
@@ -13,7 +16,7 @@ jobs:
       - name: 'Build and deploy'
         uses: shalzz/zola-deploy-action@master
         env:
-          PAGES_BRANCH: gh-pages
+          PAGES_BRANCH: master
           BUILD_DIR: .
           BUILD_FLAGS: --drafts
           TOKEN: ${{ secrets.DEPLOY }}
