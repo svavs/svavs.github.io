@@ -1,0 +1,149 @@
+# The base URL of the site; the only required configuration variable.
+base_url = "https://svavs.github.io"
+
+# The site title and description; used in feeds by default.
+title = "sva's site"
+description = "Lead by curiosity"
+
+# The default language; used in feeds.
+default_language = "en"
+
+# The site theme to use.
+theme = "codinfox-zola"
+
+# When set to "true", all code blocks are highlighted.
+highlight_code = true
+
+# The theme to use for code highlighting.
+# List of allowed values:
+#  1337, agola-dark, ascetic-white, axar, ayu-dark, ayu-light, 
+#  ayu-mirage, base16-ocean-dark, base16-ocean-light, bbedit, 
+#  boron, charcoal, cheerfully-light, classic-modified, demain,
+#  dimmed-fluid, dracula, gray-matter-dark, gruvbox-dark,
+#  gruvbox-light, idle, inspired-github, ir-white, kronuz, 
+#  material-dark, material-light, monokai, nord, nyx-bold, 
+#  one-dark, solarized-dark, solarized-light, subway-madrid, 
+#  subway-moscow, Tomorrow, TwoDark, visual-studio-dark, zenburn
+highlight_theme = "base16-ocean-dark"
+
+# When set to "true", a feed is automatically generated.
+generate_feed = true
+
+# The filename to use for the feed. Used as the template filename, too.
+# Defaults to "atom.xml", which has a builtin template that renders an Atom 1.0 feed.
+# There is also a builtin template "rss.xml" that renders an RSS 2.0 feed.
+# feed_filename = "atom.xml"
+
+# The number of articles to include in the feed. All items are included if
+# this limit is not set (the default).
+# feed_limit = 20
+
+# When set to "true", files in the `static` directory are hard-linked. Useful for large
+# static files. Note that for this to work, both `static` and the
+# output directory need to be on the same filesystem. Note that the theme's `static`
+# files are always copied, regardles of this setting.
+# hard_link_static = false
+
+# The taxonomies to be rendered for the site and their configuration.
+# Example:
+#     taxonomies = [
+#       {name = "tags", feed = true}, # each tag will have its own feed
+#       {name = "tags", lang = "fr"}, # you can have taxonomies with the same name in multiple languages
+#       {name = "categories", paginate_by = 5},  # 5 items per page for a term
+#       {name = "authors"}, # Basic definition: no feed or pagination
+#     ]
+#
+#taxonomies = []
+taxonomies = [
+  {name = "tags", lang = "en"},
+  {name = "categories", feed = true, lang = "en"},
+]
+
+# The additional languages for the site.
+# Example:
+#     languages = [
+#       {code = "fr", feed = true}, # there will be a feed for French content
+#       {code = "fr", search = true}, # there will be a Search Index for French content
+#       {code = "it"}, # there won't be a feed for Italian content
+#     ]
+#
+#languages = []
+languages = [
+  {code = "it", feed = true, search = false},
+]
+
+# When set to "true", the Sass files in the `sass` directory are compiled.
+compile_sass = true
+
+# When set to "true", a search index is built from the pages and section
+# content for `default_language`.
+build_search_index = true
+
+# A list of glob patterns specifying asset files to ignore when the content
+# directory is processed. Defaults to none, which means that all asset files are
+# copied over to the `public` directory.
+# Example:
+#     ignored_content = ["*.{graphml,xlsx}", "temp.*"]
+#ignored_content = []
+
+# A list of directories used to search for additional `.sublime-syntax` files.
+#extra_syntaxes = []
+
+# Optional translation object. The key if present should be a language code.
+# Example:
+#     default_language = "fr"
+#
+#     [translations]
+#     [translations.fr]
+#     title = "Un titre"
+#
+#     [translations.en]
+#     title = "A title"
+
+
+# Configuration of the link checker.
+#[link_checker]
+# Skip link checking for external URLs that start with these prefixes
+#skip_prefixes = [
+#    "http://[2001:db8::]/",
+#]
+
+# Skip anchor checking for external URLs that start with these prefixes
+#skip_anchor_prefixes = [
+#    "https://caniuse.com/",
+#]
+
+# Various slugification strategies, see below for details
+# Defauls to everything being a slug
+#[slugify]
+#paths = "on"
+#taxonomies = "on"
+#anchors = "on"
+
+# Optional translation object. Keys should be language codes.
+#[translations]
+
+# You can put any kind of data here. The data
+# will be accessible in all templates.
+[extra]
+logo = "/mylogo_2.png"
+
+version = "1.0.1"
+copyrightyear = "2020"
+
+# Puglins
+mathjax = true # whether support mathjax
+google_analytics_token = "" # a UA-00000000-1 like code or leave blank if you don't want google analytics
+disqus_short_name = "your_short_name" # leave blank if you don't want disqus
+
+# Where are tags and categories displayed
+tag_page = "/tags/"
+category_page = "/categories/"
+
+# hero
+image = "/img/curiosity_by_elementalspirits_dci8yl7.png"  # image for the home page
+caption = "Original Artwork &copy; <a href=\"https://www.deviantart.com/starsinmyfingertips/art/Curiosity-639126235\">2016 - 2020 StarsInMyFingertips</a>"  # caption for the home page image
+#
+
+# show or not the reading time based on https://help.medium.com/hc/en-us/articles/214991667-Read-time
+read_time = true
