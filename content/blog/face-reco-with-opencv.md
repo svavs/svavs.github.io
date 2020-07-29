@@ -8,3 +8,4 @@ tags = ["face recognition", "OpenCV", "C++"]
 categories = ["face recognition"]
 +++
 
+Example of working C++ code for face recognition using the OpenCV library.
