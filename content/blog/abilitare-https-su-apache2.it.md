@@ -27,21 +27,29 @@ sudo a2enmod ssl
 
 A questo punto è necessario creare una cartella in cui generare i certificati di sicurezza utilizzati dall'SSL. A tal proposito è consigliabile creare una nuova sottocartella dentro quella di Apache:
 
-`sudo mkdir /etc/apache2/ssl`
+```bash
+sudo mkdir /etc/apache2/ssl
+```
 
 In altri sistemi la cartella del web server può essere diversa da `/etc/apache2`, ad esemprio in *CentOS* si avrà `/etc/httpd`.
 
 Per ottenere la chiave privata e il certificato si utilizza openssl che solitamente troverete già installato nel sistema. È però opportuno verificare che openssl sia installato nel sistema:
 
-`sudo apt policy openssl`
+```bash
+sudo apt policy openssl
+```
 
 e, in caso non fosse installato, procedere alla sua installazione con:
 
-`sudo apt install openssl`
+```bash
+sudo apt install openssl
+```
 
 Il seguente comando generera la key ed il certificato richiesto con crittografia RSA a 2048 bit e una validità di 365 giorni:
 
-`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt`
+```bash
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+```
 
 Verrà avviata una procedura di creazione dei certificati durante la quale verranno poste alcune semplici domande:
 
@@ -57,7 +65,9 @@ Email Address []:maildiriferimento@dominio.it
 
 A questo punto non resta che configurare correttametne i VirtualHost e abilitarli sulla connessione sicura che si trova sulla porta 443 accessibile con la chiave e il certificato appena creati.
 
-`sudo vim /etc/apache2/sites-available/default-ssl.conf`
+```bash
+sudo vim /etc/apache2/sites-available/default-ssl.conf
+```
 
 ```apacheconf
 <VirtualHost *:80>
@@ -105,11 +115,15 @@ A questo punto non resta che configurare correttametne i VirtualHost e abilitarl
 
 A questo punto la configurazione è terminata e basta abilitare il VirtualHost di interesse:
 
-`sudo a2ensite default-ssl.conf`
+```bash
+sudo a2ensite default-ssl.conf
+```
 
 e *riavviare* il server apache per rendere effettive le modifiche
 
-`sudo systemctl restart apache2`
+```bash
+sudo systemctl restart apache2
+```
 
 Ora, ammesso che il nostro firewall consenta il traffico sulla **porta 443**, visitando l'indirizzo del VirtualHost comparirà un avviso che ci avverte che il certificato non è attendibile. Questo è normale in quanto lo abbiamo autogenerato e non acquistato da un ente certificatore: basterà procedere accettando i rischi per navidare sul dominio in maniera sicura. 
 
