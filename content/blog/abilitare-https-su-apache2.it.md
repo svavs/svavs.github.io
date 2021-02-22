@@ -21,7 +21,9 @@ Ipotizzando di avere già un server LAMP preconfigurato e funzionante, è possib
 Su piattaforme Linux basate su *sistemi [Ubuntu[(https://ubuntu.com/)*, così come su altre distribuzioni, il **modulo SSL** è già presente nell'installazione base di Apache.
 Bisogna solo attivarlo con il seguente comando che abilita l'utilizzo della porta 443 solitamente utilizzata per l'https:
 
-`sudo a2enmod ssl`
+```bash
+sudo a2enmod ssl
+```
 
 A questo punto è necessario creare una cartella in cui generare i certificati di sicurezza utilizzati dall'SSL. A tal proposito è consigliabile creare una nuova sottocartella dentro quella di Apache:
 
