@@ -6,7 +6,7 @@ draft = false
 
 [taxonomies]
 tags = ["apache2", "https", "ssl", "LAMP", "ubuntu", "linux"]
-categories = ["web server"]
+categorie = ["web server"]
 +++
 
 Nel seguito si suppone di voler abilitare *su un server [Apache2](https://httpd.apache.org/)* il protocollo <abbr title="HyperText Transfer Protocol over Secure Socket Layer">HTTPS</abbr> affinché si possano abilitare VirtualHosts in <abbr title="Secure Sockets Layer">SSL</abbr> dedicati a siti web con domini preconfigurati. 
