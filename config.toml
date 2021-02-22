@@ -71,7 +71,7 @@ taxonomies = [
 #
 #languages = []
 languages = [
-  {code = "it", feed = true, search = false},
+  {code = "it", feed = true, search = true},
 ]
 
 # When set to "true", the Sass files in the `sass` directory are compiled.
