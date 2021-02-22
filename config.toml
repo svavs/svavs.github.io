@@ -56,7 +56,7 @@ generate_feed = true
 #taxonomies = []
 taxonomies = [
   {name = "tags", lang = "en"},
-  {name = "tags", lang = "it"}, 
+  {name = "tag", lang = "it"}, 
   {name = "categories", feed = true, lang = "en"},
   {name = "categorie", feed = true, lang = "it"}
 ]

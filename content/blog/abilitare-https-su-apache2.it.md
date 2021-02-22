@@ -5,7 +5,7 @@ date = 2021-02-22
 draft = false
 
 [taxonomies]
-tags = ["apache2", "https", "ssl", "LAMP", "ubuntu", "linux"]
+tag = ["apache2", "https", "ssl", "LAMP", "ubuntu", "linux"]
 categorie = ["web server"]
 +++
 
