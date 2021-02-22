@@ -57,7 +57,7 @@ A questo punto non resta che configurare correttametne i VirtualHost e abilitarl
 
 `sudo vim /etc/apache2/sites-available/default-ssl.conf`
 
-```
+```xml
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
  
