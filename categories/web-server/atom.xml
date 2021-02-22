@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>sva&#x27;s site - web server</title>
+	<subtitle>Lead by curiosity</subtitle>
+	<link href="https://svavs.github.io/categories/web-server/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://svavs.github.io"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-02-22T00:00:00+00:00</updated>
+	<id>https://svavs.github.io/categories/web-server/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Abilitare HTTPS su Apache2</title>
+		<published>2021-02-22T00:00:00+00:00</published>
+		<updated>2021-02-22T00:00:00+00:00</updated>
+		<link href="https://svavs.github.io/blog/abilitare-https-su-apache2/" type="text/html"/>
+		<id>https://svavs.github.io/blog/abilitare-https-su-apache2/</id>
+		<content type="html">&lt;p&gt;English version is &lt;em&gt;coming soon&lt;&#x2F;em&gt; :)&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

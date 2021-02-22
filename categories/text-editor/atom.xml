@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>sva&#x27;s site - text editor</title>
+	<subtitle>Lead by curiosity</subtitle>
+	<link href="https://svavs.github.io/categories/text-editor/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://svavs.github.io"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2020-07-29T00:00:00+00:00</updated>
+	<id>https://svavs.github.io/categories/text-editor/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Configuring Spacemacs</title>
+		<published>2020-07-29T00:00:00+00:00</published>
+		<updated>2020-07-29T00:00:00+00:00</updated>
+		<link href="https://svavs.github.io/blog/configuring-spacemacs/" type="text/html"/>
+		<id>https://svavs.github.io/blog/configuring-spacemacs/</id>
+		<content type="html">&lt;p&gt;My spacemacs configuration.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Emacs Tera mode</title>
+		<published>2020-07-29T00:00:00+00:00</published>
+		<updated>2020-07-29T00:00:00+00:00</updated>
+		<link href="https://svavs.github.io/blog/tera-mode/" type="text/html"/>
+		<id>https://svavs.github.io/blog/tera-mode/</id>
+		<content type="html">&lt;p&gt;My Emacs mode for the Tera template language.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

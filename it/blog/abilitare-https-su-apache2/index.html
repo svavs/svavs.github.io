@@ -1,0 +1,499 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15502137-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-15502137-4');
+    </script>
+    
+
+    
+    
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+
+    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+
+    
+    
+<title>
+    
+    Abilitare HTTPS su Apache2 &middot; sva&#x27;s site
+    
+</title>
+
+
+
+    
+  <!-- CSS -->
+  <link rel="stylesheet" href="https:&#x2F;&#x2F;svavs.github.io/main.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+
+    
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https:&#x2F;&#x2F;svavs.github.io/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="https:&#x2F;&#x2F;svavs.github.io/favicon.ico">
+
+
+    
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+    
+  
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"> </script>
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });
+  </script>
+  
+
+  </head>
+
+  <body>
+
+    
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+        styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+    <!-- Toggleable sidebar -->
+    <div class="sidebar" id="sidebar">
+      
+  <div class="sidebar-item">
+    <div class="sidebar-personal-info">
+      <div class="sidebar-personal-info-section">
+        <a href="http://gravatar.com/955199a8639b75e98f6efd05e71727da">
+          <img src="http://www.gravatar.com/avatar/955199a8639b75e98f6efd05e71727da?s=350" title="View on Gravatar" alt="View on Gravatar" />
+        </a>
+      </div>
+      <div class="sidebar-personal-info-section">
+        <p>A passionate <span class="codinfox-changing-keywords"><b class="visible">developer,</b><b class="hidden">researcher,</b></span> lead by curiosity.</p>
+      </div>
+      
+      
+      
+      <div class="sidebar-personal-info-section">
+        <p> Follow me: <br />
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;svavs">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;github.com&#x2F;svavs">
+          <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;twitter.com&#x2F;svavs">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;instagram.com&#x2F;svavs">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.last.fm&#x2F;user&#x2F;svavsa">
+          <i class="fa fa-lastfm" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="http:&#x2F;&#x2F;svavs.tumblr.com&#x2F;">
+          <i class="fa fa-tumblr" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        
+        
+        <a href="">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        </p>
+      </div>
+      
+    </div>
+  </div>
+ 
+
+      
+   
+  <nav class="sidebar-nav">
+    
+      
+      
+      
+        
+      
+
+      <span class="">
+        <a class="sidebar-nav-item " href="https:&#x2F;&#x2F;svavs.github.io&#x2F;">
+          Home
+        </a>
+
+        
+      </span>
+
+    
+      
+      
+      
+        
+      
+
+      <span class="foldable">
+        <a class="sidebar-nav-item " href="https:&#x2F;&#x2F;svavs.github.io&#x2F;blog&#x2F;">
+          Blog
+        </a>
+
+        
+          
+          
+            
+              
+              
+              
+                
+              
+              <a class="sidebar-nav-item sidebar-nav-item-sub " href="https:&#x2F;&#x2F;svavs.github.io&#x2F;categories&#x2F;">
+                Categories
+              </a>
+            
+              
+              
+              
+                
+              
+              <a class="sidebar-nav-item sidebar-nav-item-sub " href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;">
+                Tags
+              </a>
+            
+          
+        
+      </span>
+
+    
+      
+      
+      
+        
+      
+
+      <span class="">
+        <a class="sidebar-nav-item " href="https:&#x2F;&#x2F;svavs.github.io&#x2F;about&#x2F;">
+          About
+        </a>
+
+        
+      </span>
+
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.1</span>
+  </nav>
+
+
+
+      
+  <div class="sidebar-item">
+    <p>
+    &copy; 2020 Silvano Sallese. This work is liscensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+    </p>
+  </div>
+
+
+      
+  <div class="sidebar-item">
+    <p>
+        Powered by <a href="https://www.getzola.org">Zola</a> and <a href="https://github.com/svavs/codinfox-zola">Codinfox-Zola</a>
+    </p>
+  </div>
+ 
+
+      
+	<script>
+	(function(){
+	document.addEventListener('DOMContentLoaded', function(){
+	    var children = document.getElementsByClassName('codinfox-changing-keywords')[0].children;
+	    var length = children.length;
+	    var idx = 0;
+	    setInterval(function(){
+		children[idx].className = "hidden";
+		idx = (idx + 1) % length;
+		children[idx].className = "visible";
+	    }, 2000);
+	});
+	})();
+	</script>
+
+    </div>
+    
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+
+      
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https:&#x2F;&#x2F;svavs.github.io/" title="Home" title="sva&#x27;s site">
+              <img class="masthead-logo" src="https:&#x2F;&#x2F;svavs.github.io&#x2F;mylogo_2.png"/>
+            </a>
+            <small>Lead by curiosity</small>
+            
+              
+                <small class="multilingual">
+                  
+                  
+                    
+                      it
+                      
+                    
+                  
+
+                  
+                    | <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;blog&#x2F;abilitare-https-su-apache2&#x2F;">en</a>
+                  
+                </small>
+              
+            
+          </h3>
+        </div>
+      </div>
+
+
+
+      <div class="container content">
+
+        
+	      <div class="post">
+          <h1 class="post-title">Abilitare HTTPS su Apache2</h1>
+          <span class="post-date">2021-02-22</span>
+           |
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;apache2&#x2F;" class="post-tag">apache2</a>
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;https&#x2F;" class="post-tag">https</a>
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;ssl&#x2F;" class="post-tag">ssl</a>
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;lamp&#x2F;" class="post-tag">LAMP</a>
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;ubuntu&#x2F;" class="post-tag">ubuntu</a>
+            
+            <a href="https:&#x2F;&#x2F;svavs.github.io&#x2F;tags&#x2F;linux&#x2F;" class="post-tag">linux</a>
+            
+          
+          <article>
+            <p>Nel seguito si suppone di voler abilitare <em>su un server <a href="https://httpd.apache.org/">Apache2</a></em> il protocollo <abbr title="HyperText Transfer Protocol over Secure Socket Layer">HTTPS</abbr> affinché si possano abilitare VirtualHosts in <abbr title="Secure Sockets Layer">SSL</abbr> dedicati a siti web con domini preconfigurati. </p>
+<p>Quindi si vuole rendere lo scambio di tati sicuro. </p>
+<p>Per evitare lo sniffing di dati scambiati bidirezionalmente fra server e client solitamente si procede all'abilitazione del protocollo di crittografia asimmetrica.</p>
+<p>Ipotizzando di avere già un server LAMP preconfigurato e funzionante, è possibile procedere all'abilitazione dell'https: operazione anche questa più da sistemista che da web developer, ma sicuramente alla portata di tutti.</p>
+<span id="continue-reading"></span>
+<p>Su piattaforme Linux basate su <em>sistemi [Ubuntu[(https://ubuntu.com/)</em>, così come su altre distribuzioni, il <strong>modulo SSL</strong> è già presente nell'installazione base di Apache.
+Bisogna solo attivarlo con il seguente comando che abilita l'utilizzo della porta 443 solitamente utilizzata per l'https:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> a2enmod ssl
+</span></code></pre>
+<p>A questo punto è necessario creare una cartella in cui generare i certificati di sicurezza utilizzati dall'SSL. A tal proposito è consigliabile creare una nuova sottocartella dentro quella di Apache:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> mkdir /etc/apache2/ssl
+</span></code></pre>
+<p>In altri sistemi la cartella del web server può essere diversa da <code>/etc/apache2</code>, ad esemprio in <em>CentOS</em> si avrà <code>/etc/httpd</code>.</p>
+<p>Per ottenere la chiave privata e il certificato si utilizza openssl che solitamente troverete già installato nel sistema. È però opportuno verificare che openssl sia installato nel sistema:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> apt policy openssl
+</span></code></pre>
+<p>e, in caso non fosse installato, procedere alla sua installazione con:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> apt install openssl
+</span></code></pre>
+<p>Il seguente comando generera la key ed il certificato richiesto con crittografia RSA a 2048 bit e una validità di 365 giorni:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> openssl req</span><span style="color:#bf616a;"> -x509 -nodes -days</span><span style="color:#c0c5ce;"> 365</span><span style="color:#bf616a;"> -newkey</span><span style="color:#c0c5ce;"> rsa:2048</span><span style="color:#bf616a;"> -keyout</span><span style="color:#c0c5ce;"> /etc/apache2/ssl/apache.key</span><span style="color:#bf616a;"> -out</span><span style="color:#c0c5ce;"> /etc/apache2/ssl/apache.crt
+</span></code></pre>
+<p>Verrà avviata una procedura di creazione dei certificati durante la quale verranno poste alcune semplici domande:</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">Country Name (2 letter code) [AU]:IT
+State or Province Name (full name) [Some-State]:Pordenone
+Locality Name (eg, city) []:Pordenone
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:lamiaorganizzazione
+Organizational Unit Name (eg, section) []:Development
+Common Name (e.g. server FQDN or YOUR name) []:ServerMio
+Email Address []:maildiriferimento@dominio.it
+</span></code></pre>
+<p>A questo punto non resta che configurare correttametne i VirtualHost e abilitarli sulla connessione sicura che si trova sulla porta 443 accessibile con la chiave e il certificato appena creati.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> vim /etc/apache2/sites-available/default-ssl.conf
+</span></code></pre><pre style="background-color:#2b303b;">
+<code class="language-apacheconf" data-lang="apacheconf"><span style="color:#c0c5ce;">&lt;VirtualHost *:80&gt;
+        ServerAdmin webmaster@localhost
+ 
+        DocumentRoot /var/www/html
+        &lt;Directory /&gt;
+                Options FollowSymLinks
+                AllowOverride All
+        &lt;/Directory&gt;
+        &lt;Directory /var/www/&gt;
+                Options -Indexes +FollowSymLinks +MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        &lt;/Directory&gt;
+ 
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        &lt;Directory &quot;/usr/lib/cgi-bin&quot;&gt;
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        &lt;/Directory&gt;
+ 
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+ 
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+ 
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+ 
+        Alias /doc/ &quot;/usr/share/doc/&quot;
+        &lt;Directory &quot;/usr/share/doc/&quot;&gt;
+                Options MultiViews FollowSymLinks
+                AllowOverride None
+                Order deny,allow
+                Deny from all
+                Allow from 127.0.0.0/255.0.0.0 ::1/128
+        &lt;/Directory&gt;
+ 
+&lt;/VirtualHost&gt;
+</span></code></pre>
+<p>A questo punto la configurazione è terminata e basta abilitare il VirtualHost di interesse:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> a2ensite default-ssl.conf
+</span></code></pre>
+<p>e <em>riavviare</em> il server apache per rendere effettive le modifiche</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> systemctl restart apache2
+</span></code></pre>
+<p>Ora, ammesso che il nostro firewall consenta il traffico sulla <strong>porta 443</strong>, visitando l'indirizzo del VirtualHost comparirà un avviso che ci avverte che il certificato non è attendibile. Questo è normale in quanto lo abbiamo autogenerato e non acquistato da un ente certificatore: basterà procedere accettando i rischi per navidare sul dominio in maniera sicura. </p>
+<p>Questa generazione dei certificati è consigliabile per utilizzo in localhost in fase di sviluppo o testing, ma per siti o app pubbliche è vivamente consigliato l'acquisto di un certificato verificato anche per non spaventare gli utenti con l'avviso di sicurezza che tutti i browser mostreranno. </p>
+
+          </article>
+        </div>
+
+        <div class="related">
+          <h2>Other Posts</h2>
+          <ul class="related-posts">
+            <li class="previous">
+            
+            </li>
+            <li class="next">
+            
+            </li>
+          </ul>
+        </div>
+
+        
+        <div class="comments">
+          <h2>Comments</h2>
+          <div id="disqus_thread"></div>
+          <script>
+            var disqus_config = function () {
+            this.page.url = 'https://svavs.github.io/it/blog/abilitare-https-su-apache2/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'Abilitare HTTPS su Apache2'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://svavs-on-github.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+        
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if (target === toggle) {
+            checkbox.checked = !checkbox.checked;
+            e.preventDefault();
+          } else if (checkbox.checked && !sidebar.contains(target)) {
+            /* click outside the sidebar when sidebar is open */
+            checkbox.checked = false;
+          }
+        }, false);
+      })(document);
+    </script>
+
+
+
+  </body>
+
+  
+  
+  <script id="dsq-count-scr" src="//svavs-on-github.disqus.com/count.js" async></script>
+  
+
+
+</html>

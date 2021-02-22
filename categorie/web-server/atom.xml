@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="it">
+	<title>sva&#x27;s site - web server</title>
+	<subtitle>Lead by curiosity</subtitle>
+	<link href="https://svavs.github.io/categorie/web-server/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://svavs.github.io"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-02-22T00:00:00+00:00</updated>
+	<id>https://svavs.github.io/categorie/web-server/atom.xml</id>
+	<entry xml:lang="it">
+		<title>Abilitare HTTPS su Apache2</title>
+		<published>2021-02-22T00:00:00+00:00</published>
+		<updated>2021-02-22T00:00:00+00:00</updated>
+		<link href="https://svavs.github.io/it/blog/abilitare-https-su-apache2/" type="text/html"/>
+		<id>https://svavs.github.io/it/blog/abilitare-https-su-apache2/</id>
+		<content type="html">&lt;p&gt;Nel seguito si suppone di voler abilitare &lt;em&gt;su un server &lt;a href=&quot;https:&#x2F;&#x2F;httpd.apache.org&#x2F;&quot;&gt;Apache2&lt;&#x2F;a&gt;&lt;&#x2F;em&gt; il protocollo &lt;abbr title=&quot;HyperText Transfer Protocol over Secure Socket Layer&quot;&gt;HTTPS&lt;&#x2F;abbr&gt; affinché si possano abilitare VirtualHosts in &lt;abbr title=&quot;Secure Sockets Layer&quot;&gt;SSL&lt;&#x2F;abbr&gt; dedicati a siti web con domini preconfigurati. &lt;&#x2F;p&gt;
+&lt;p&gt;Quindi si vuole rendere lo scambio di tati sicuro. &lt;&#x2F;p&gt;
+&lt;p&gt;Per evitare lo sniffing di dati scambiati bidirezionalmente fra server e client solitamente si procede all&#x27;abilitazione del protocollo di crittografia asimmetrica.&lt;&#x2F;p&gt;
+&lt;p&gt;Ipotizzando di avere già un server LAMP preconfigurato e funzionante, è possibile procedere all&#x27;abilitazione dell&#x27;https: operazione anche questa più da sistemista che da web developer, ma sicuramente alla portata di tutti.&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;
+&lt;p&gt;Su piattaforme Linux basate su &lt;em&gt;sistemi [Ubuntu[(https:&#x2F;&#x2F;ubuntu.com&#x2F;)&lt;&#x2F;em&gt;, così come su altre distribuzioni, il &lt;strong&gt;modulo SSL&lt;&#x2F;strong&gt; è già presente nell&#x27;installazione base di Apache.
+Bisogna solo attivarlo con il seguente comando che abilita l&#x27;utilizzo della porta 443 solitamente utilizzata per l&#x27;https:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; a2enmod ssl
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A questo punto è necessario creare una cartella in cui generare i certificati di sicurezza utilizzati dall&#x27;SSL. A tal proposito è consigliabile creare una nuova sottocartella dentro quella di Apache:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; mkdir &#x2F;etc&#x2F;apache2&#x2F;ssl
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In altri sistemi la cartella del web server può essere diversa da &lt;code&gt;&#x2F;etc&#x2F;apache2&lt;&#x2F;code&gt;, ad esemprio in &lt;em&gt;CentOS&lt;&#x2F;em&gt; si avrà &lt;code&gt;&#x2F;etc&#x2F;httpd&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Per ottenere la chiave privata e il certificato si utilizza openssl che solitamente troverete già installato nel sistema. È però opportuno verificare che openssl sia installato nel sistema:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; apt policy openssl
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;e, in caso non fosse installato, procedere alla sua installazione con:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; apt install openssl
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Il seguente comando generera la key ed il certificato richiesto con crittografia RSA a 2048 bit e una validità di 365 giorni:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; openssl req&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -x509 -nodes -days&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; 365&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -newkey&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; rsa:2048&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -keyout&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; &#x2F;etc&#x2F;apache2&#x2F;ssl&#x2F;apache.key&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -out&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; &#x2F;etc&#x2F;apache2&#x2F;ssl&#x2F;apache.crt
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Verrà avviata una procedura di creazione dei certificati durante la quale verranno poste alcune semplici domande:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;Country Name (2 letter code) [AU]:IT
+State or Province Name (full name) [Some-State]:Pordenone
+Locality Name (eg, city) []:Pordenone
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:lamiaorganizzazione
+Organizational Unit Name (eg, section) []:Development
+Common Name (e.g. server FQDN or YOUR name) []:ServerMio
+Email Address []:maildiriferimento@dominio.it
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A questo punto non resta che configurare correttametne i VirtualHost e abilitarli sulla connessione sicura che si trova sulla porta 443 accessibile con la chiave e il certificato appena creati.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; vim &#x2F;etc&#x2F;apache2&#x2F;sites-available&#x2F;default-ssl.conf
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-apacheconf&quot; data-lang=&quot;apacheconf&quot;&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;lt;VirtualHost *:80&amp;gt;
+        ServerAdmin webmaster@localhost
+ 
+        DocumentRoot &#x2F;var&#x2F;www&#x2F;html
+        &amp;lt;Directory &#x2F;&amp;gt;
+                Options FollowSymLinks
+                AllowOverride All
+        &amp;lt;&#x2F;Directory&amp;gt;
+        &amp;lt;Directory &#x2F;var&#x2F;www&#x2F;&amp;gt;
+                Options -Indexes +FollowSymLinks +MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        &amp;lt;&#x2F;Directory&amp;gt;
+ 
+        ScriptAlias &#x2F;cgi-bin&#x2F; &#x2F;usr&#x2F;lib&#x2F;cgi-bin&#x2F;
+        &amp;lt;Directory &amp;quot;&#x2F;usr&#x2F;lib&#x2F;cgi-bin&amp;quot;&amp;gt;
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        &amp;lt;&#x2F;Directory&amp;gt;
+ 
+        ErrorLog ${APACHE_LOG_DIR}&#x2F;error.log
+ 
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+ 
+        CustomLog ${APACHE_LOG_DIR}&#x2F;access.log combined
+ 
+        Alias &#x2F;doc&#x2F; &amp;quot;&#x2F;usr&#x2F;share&#x2F;doc&#x2F;&amp;quot;
+        &amp;lt;Directory &amp;quot;&#x2F;usr&#x2F;share&#x2F;doc&#x2F;&amp;quot;&amp;gt;
+                Options MultiViews FollowSymLinks
+                AllowOverride None
+                Order deny,allow
+                Deny from all
+                Allow from 127.0.0.0&#x2F;255.0.0.0 ::1&#x2F;128
+        &amp;lt;&#x2F;Directory&amp;gt;
+ 
+&amp;lt;&#x2F;VirtualHost&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A questo punto la configurazione è terminata e basta abilitare il VirtualHost di interesse:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; a2ensite default-ssl.conf
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;e &lt;em&gt;riavviare&lt;&#x2F;em&gt; il server apache per rendere effettive le modifiche&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; systemctl restart apache2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Ora, ammesso che il nostro firewall consenta il traffico sulla &lt;strong&gt;porta 443&lt;&#x2F;strong&gt;, visitando l&#x27;indirizzo del VirtualHost comparirà un avviso che ci avverte che il certificato non è attendibile. Questo è normale in quanto lo abbiamo autogenerato e non acquistato da un ente certificatore: basterà procedere accettando i rischi per navidare sul dominio in maniera sicura. &lt;&#x2F;p&gt;
+&lt;p&gt;Questa generazione dei certificati è consigliabile per utilizzo in localhost in fase di sviluppo o testing, ma per siti o app pubbliche è vivamente consigliato l&#x27;acquisto di un certificato verificato anche per non spaventare gli utenti con l&#x27;avviso di sicurezza che tutti i browser mostreranno. &lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
