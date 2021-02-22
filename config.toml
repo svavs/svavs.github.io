@@ -56,7 +56,9 @@ generate_feed = true
 #taxonomies = []
 taxonomies = [
   {name = "tags", lang = "en"},
+  {name = "tags", lang = "it"}, 
   {name = "categories", feed = true, lang = "en"},
+  {name = "categorie", feed = true, lang = "it"}
 ]
 
 # The additional languages for the site.
